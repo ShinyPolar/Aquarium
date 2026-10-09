@@ -3,6 +3,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import "sections"
 
 Scope {
 
@@ -13,6 +14,7 @@ Scope {
       id: rightPanel
       required property var modelData
       screen: modelData
+      focusable: true
 
       exclusionMode: ExclusionMode.Ignore
 
@@ -67,8 +69,8 @@ Scope {
 	}
 	Component {
 	  id: wifiStub
-	  Rectangle { color: "#1d9e75"; Text { anchors.centerIn: parent; text: "wifi stub" } }
-	}
+          WifiSection {}
+  	}
 	Component {
 	  id: btStub
 	  Rectangle { color: "#378add"; Text { anchors.centerIn: parent; text: "bluetooth stub" } }

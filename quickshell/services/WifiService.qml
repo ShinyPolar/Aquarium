@@ -73,5 +73,34 @@ Singleton {
   function toggleWifi() {
     Networking.wifiEnabled = !Networking.wifiEnabled;
   }
+  // List-ready copy: hidden (nameless) networks dropped, connected first,
+  // then strongest signal first.
+  readonly property var sortedNetworks: {
+    const nets = networks ? networks.values.slice() : [];
+    return nets
+      .filter(n => n.name && n.name.length > 0)
+      .sort((a, b) => (b.connected - a.connected)
+                   || (b.signalStrength - a.signalStrength));
+  }
+
+  // --- Security helpers ------------------------------------------------
+  function isOpen(n) {
+    return n && (n.security === WifiSecurityType.Open
+              || n.security === WifiSecurityType.Owe);
+  }
+  function isSecured(n) { return n && !isOpen(n); }
+  // What connectWithPsk() accepts.
+  function supportsPassword(n) {
+    return n && (n.security === WifiSecurityType.WpaPsk
+              || n.security === WifiSecurityType.Wpa2Psk
+              || n.security === WifiSecurityType.Sae);
+  }
+  function needsPassword(n) { return n && !n.known && supportsPassword(n); }
+  // Enterprise (EAP etc.) needs certs/usernames -- out of scope for now.
+  function isSupported(n) {
+    return n && (n.known || isOpen(n) || supportsPassword(n)
+              || n.security === WifiSecurityType.Unknown);
+  }
+
 }
 
