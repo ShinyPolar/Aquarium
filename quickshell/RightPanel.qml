@@ -4,6 +4,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import "sections"
+import "top"
+import "services"
 
 Scope {
 
@@ -41,9 +43,42 @@ Scope {
 	  spacing: 12
 	
 	  RowLayout {
-	    Button { text: "Wifi"; onClicked: Global.request("wifi") }
-	    Button { text: "Bluetooth"; onClicked: Global.request("bluetooth") }
-	    Button { text: "Volume"; onClicked: Global.request("volume") }
+	  SanityCircle { Layout.alignment: Qt.AlignTop }
+
+ 	 ColumnLayout {
+ 	   Layout.fillWidth: true
+ 	   Layout.alignment: Qt.AlignTop
+ 	   spacing: 10
+
+ 	   EventBanner {
+ 	     Layout.fillWidth: true
+ 	     panelName: "wifi"
+ 	     title: "WI-FI"
+ 	     subtitle: !WifiService.enabled  ? "Radio off"
+ 	             : WifiService.connected ? WifiService.activeName
+ 	             :                         "No network"
+ 	     status: !WifiService.enabled  ? "CLOSED"
+ 	           : WifiService.connected ? "ONLINE " + Math.round(WifiService.activeSignal * 100) + "%"
+ 	           :                         "STANDBY"
+ 	     live: WifiService.connected
+ 	   }
+
+ 	   EventBanner {
+ 	     Layout.fillWidth: true
+ 	     panelName: "bluetooth"
+ 	     title: "BLUETOOTH"
+ 	     accent: Theme.accentAlt
+ 	     subtitle: !BluetoothService.available    ? "No adapter"
+ 	             : !BluetoothService.powered      ? "Radio off"
+ 	             : BluetoothService.hasConnection ? BluetoothService.connectedDevices.map(d => d.name).join(", ")
+ 	             :                                  "No devices linked"
+ 	     status: !BluetoothService.powered      ? "CLOSED"
+ 	           : BluetoothService.hasConnection ? "LINKED"
+ 	           :                                  "STANDBY"
+ 	     live: BluetoothService.hasConnection
+ 	   }
+
+ 	 }
 	  }
 	
 	  RowLayout {
@@ -51,7 +86,14 @@ Scope {
 	  }
 	
 	  RowLayout {
-	    // third row
+		  // third row
+  		  EventBanner {   // placeholder until the audio service exists
+  		    Layout.fillWidth: true
+  		    panelName: "volume"
+  		    title: "MIXER"
+  		    subtitle: "Volume control"
+  		    status: "SOON"
+  		  }
 	  }
 	}
 	
