@@ -2,6 +2,7 @@
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
+import "widgets"
 
 Scope {
 
@@ -12,7 +13,7 @@ Scope {
       id: bar	    
       required property var modelData
       screen: modelData
-      color: "Transparent" 
+      color: "transparent" 
 
       anchors {
         top: true
@@ -32,11 +33,16 @@ Scope {
       implicitWidth: 30
       ColumnLayout {
         anchors.horizontalCenter: parent.horizontalCenter 
-        spacing: 8
+	spacing: 8
+	anchors.top: parent.top
+	anchors.topMargin: 8
 
-        ClockWidget { }
-        Networking { barWindow: bar }
-      } 	
+        ClockWidget 	{Layout.alignment: Qt.AlignHCenter }
+	DateWidget 	{Layout.alignment: Qt.AlignHCenter }
+	WifiIndicator	{Layout.alignment: Qt.AlignHCenter }
+	BluetoothIndicator {Layout.alignment: Qt.AlignHCenter}
+	BatteryIndicator { Layout.alignment: Qt.AlignHCenter}
+       } 	
      
     }
   }
