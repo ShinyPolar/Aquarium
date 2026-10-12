@@ -49,19 +49,21 @@ Scope {
  	   Layout.fillWidth: true
  	   Layout.alignment: Qt.AlignTop
  	   spacing: 10
-
- 	   EventBanner {
- 	     Layout.fillWidth: true
- 	     panelName: "wifi"
- 	     title: "WI-FI"
- 	     subtitle: !WifiService.enabled  ? "Radio off"
- 	             : WifiService.connected ? WifiService.activeName
- 	             :                         "No network"
- 	     status: !WifiService.enabled  ? "CLOSED"
- 	           : WifiService.connected ? "ONLINE " + Math.round(WifiService.activeSignal * 100) + "%"
- 	           :                         "STANDBY"
- 	     live: WifiService.connected
- 	   }
+	   WifiBanner {
+	     Layout.fillWidth: true
+	   }
+ 	  // EventBanner {
+ 	  //   Layout.fillWidth: true
+ 	  //   panelName: "wifi"
+ 	  //   title: "WI-FI"
+ 	  //   subtitle: !WifiService.enabled  ? "Radio off"
+ 	  //           : WifiService.connected ? WifiService.activeName
+ 	  //           :                         "No network"
+ 	  //   status: !WifiService.enabled  ? "CLOSED"
+ 	  //         : WifiService.connected ? "ONLINE " + Math.round(WifiService.activeSignal * 100) + "%"
+ 	  //         :                         "STANDBY"
+ 	  //   live: WifiService.connected
+ 	  // }
 
  	   EventBanner {
  	     Layout.fillWidth: true

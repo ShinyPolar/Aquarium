@@ -9,6 +9,8 @@ import Quickshell.Networking
 import "../services"
 import ".."            // Global.qml at the config root -- adjust if you moved it
 
+
+
 Item {
   id: root
 

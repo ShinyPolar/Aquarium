@@ -20,6 +20,7 @@ Scope {
         bottom: true
         right: true
       }
+      
 
       Rectangle {
 	      anchors.fill: parent
