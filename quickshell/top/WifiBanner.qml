@@ -8,6 +8,9 @@ Item {
   property color accent: Theme.accent
   property string panelName: "wifi"
   property color sandColor: "#c9b48a"
+  property color sandDColor: '#a78e5e'
+  property color waterColor: "#18A6C7"
+  property color waterDColor: "#14859f"
 
 
 
@@ -19,54 +22,116 @@ Item {
     Rectangle {
       width: parent.width
       height: parent.height
-      color: "#40000000"
+      color: "black"
+      opacity: 0.7
       border.color: root.accent
       border.width: 1
 
-    //sand
-    Rectangle {
-      height: 20
-      anchors.bottom: parent.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.bottomMargin: 1
-      anchors.leftMargin: 1
-      anchors.rightMargin: 1
-      color: root.sandColor
-    
-    }
-    
-    // Chinanago
-    Chinanago {
-    //width: 40; height: 40
-    x: 150
-    extend: modelData.signalStrength     // pokes out further on strong signal
-    highlighted: modelData.connected
-    animate: Global.expanded             // freeze when the panel is closed
-    }
+      //sand
+      Rectangle {
+        height: 20
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 1
+        anchors.leftMargin: 1
+        anchors.rightMargin: 1
+        gradient: Gradient {
+          GradientStop { position: 1.0; color: root.sandColor }
+          GradientStop { position: 0.0; color: root.sandDColor }
+        }
+      }
+      //water
+      Rectangle {
+        height: parent.height - 20
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: 1
+        anchors.leftMargin: 1
+        anchors.rightMargin: 1
+        gradient: Gradient {
+          GradientStop { position: 0.0; color: root.waterColor }
+          GradientStop { position: 1.0; color: root.waterDColor }
+        }
+      }
+      
+      // Chinanago
+      Chinanago {
+      //width: 40; height: 40
+      x: 150
+      extend: modelData.signalStrength     // pokes out further on strong signal
+      highlighted: modelData.connected
+      animate: Global.expanded             // freeze when the panel is closed
+      }
 
-    Chinanago {
-    //width: 40; height: 40
-    x:170
-    extend: modelData.signalStrength     // pokes out further on strong signal
-    highlighted: modelData.connected
-    animate: Global.expanded             // freeze when the panel is closed
-    }   
+      Chinanago {
+      //width: 40; height: 40
+      x:170
+      extend: modelData.signalStrength     // pokes out further on strong signal
+      highlighted: modelData.connected
+      animate: Global.expanded             // freeze when the panel is closed
+      }   
 
-    Chinanago {
-    //width: 40; height: 40
-    x: 190
-    extend: modelData.signalStrength     // pokes out further on strong signal
-    highlighted: modelData.connected
-    animate: Global.expanded             // freeze when the panel is closed
-    }
+      Chinanago {
+      //width: 40; height: 40
+      x: 190
+      extend: modelData.signalStrength     // pokes out further on strong signal
+      highlighted: modelData.connected
+      animate: Global.expanded             // freeze when the panel is closed
+      }
 
-    Text {
-      text: "WIFI"
-      x: 5
-      color: "#F88379"
-      font.pointSize: 32
-    }
+
+
+      Text {
+        text: "W F"
+        x: 5
+        y: 0
+        color: "#F88379"
+        font.pointSize: 48
+        font.family: "Coral Reef"
+      }
+
+      Image {
+        source: "../assets/coral01.svg"
+        x: 50
+        y: 5
+        width: 48
+        height: 58
+      }
+
+      Image {
+        source: "../assets/coral01.svg"
+        x: 106
+        y: 5
+        width: 48
+        height: 58
+      }
+
+      Image {
+        source: "../assets/coral03.svg"
+        x: 3
+        y: 30
+        width: 30
+        height: 30
+      }
+
+      Image {
+        source: "../assets/coral04.svg"
+        x: 260
+        y: 18
+        width: 50
+        height: 50
+      }
+
+      Image {
+        source: "../assets/coral06.svg"
+        x: 42
+        y: 38
+        width: 30
+        height: 30
+      }
+      
   }
 
   }
